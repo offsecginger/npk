@@ -367,9 +367,10 @@ exports.main = async function(event, context, callback) {
 			}, (e) => {
 				console.log(`[!] Failed attempting to update price for ${fleetId}`);
 			}));
-
-			if (fleet.price > parseFloat(tags.MaxCost) || fleet.price > parseFloat(settings.campaign_max_price)) {
-				console.log("Fleet " + fleetId + " costs exceed limits; terminating.");
+			// Added 2023-01-17 By Alex Williams. Added a Dollar to Max Cost so that it can go up to a dollar higher per spot instance.
+			// if (fleet.price > parseFloat(tags.MaxCost) || fleet.price > parseFloat(settings.campaign_max_price)) {
+			if (fleet.price > parseFloat(tags.MaxCost) + 1.0 || fleet.price > parseFloat(settings.campaign_max_price)) {
+					console.log("Fleet " + fleetId + " costs exceed limits; terminating.");
 
 				promises.push(ec2.cancelSpotFleetRequests({
 					TerminateInstances: true,
@@ -382,9 +383,10 @@ exports.main = async function(event, context, callback) {
 					return criticalAlert(`Failed to terminate fleet ${fleetId} with cost $${fleet.price}`);
 				}));
 			}
-
-			if (fleet.price > parseFloat(tags.MaxCost) * 1.1 || fleet.price > parseFloat(settings.campaign_max_price) * 1.1) {
-				console.log("Fleet " + fleetId + " costs CRITICALLY exceed limits (" + fleet.price + "); terminating and raising critical alert.");
+			// Added 2023-01-17 By Alex Williams. Added 4 Dollars to max cost for critical limit exceeding.
+			// if (fleet.price > parseFloat(tags.MaxCost) * 1.1 || fleet.price > parseFloat(settings.campaign_max_price) * 1.1) {
+			if (fleet.price > parseFloat(tags.MaxCost) * 5.1 || fleet.price > parseFloat(settings.campaign_max_price) * 5.1) {
+					console.log("Fleet " + fleetId + " costs CRITICALLY exceed limits (" + fleet.price + "); terminating and raising critical alert.");
 				promises.push(criticalAlert("SFR " + fleetId + " current price is: " + fleet.price + "; Terminating."));
 
 				promises.push(ec2.cancelSpotFleetRequests({
