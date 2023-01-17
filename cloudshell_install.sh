@@ -45,6 +45,7 @@ fi
 if [[ ! -f /aws/mde/npk/README.md ]]; then
 	echo "[*] Cloning the NPK repo"
 	# git clone https://github.com/c6fc/npk.git /aws/mde/npk > /dev/null
+	# Edited for my repo
 	git clone https://github.com/offsecginger/npk.git /aws/mde/npk > /dev/null
 fi
 
