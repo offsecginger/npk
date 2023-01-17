@@ -184,7 +184,7 @@ exports.main = async function(event, context, callback) {
 				IamFleetRole: variables.iamFleetRole,
 				InstanceInterruptionBehavior: "terminate",
 				LaunchSpecifications: launchSpecifications,
-				SpotPrice: "0.90",
+				SpotPrice: "1.90",
 				TargetCapacity: 1,
 				ReplaceUnhealthyInstances: false,
 				TerminateInstancesWithExpiration: true,

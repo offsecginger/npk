@@ -381,7 +381,7 @@ exports.main = async function(event, context, callback) {
 				IamFleetRole: variables.iamFleetRole,
 				InstanceInterruptionBehavior: "terminate",
 				LaunchSpecifications: launchSpecifications,
-				SpotPrice: (manifest.priceTarget / (manifest.instanceCount * manifest.instanceDuration) * 2).toString(),
+				SpotPrice: (manifest.priceTarget / (manifest.instanceCount * manifest.instanceDuration) * 4).toString(),
 				TargetCapacity: manifest.instanceCount,
 				ReplaceUnhealthyInstances: false,
 				TerminateInstancesWithExpiration: true,
