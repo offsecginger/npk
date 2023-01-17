@@ -179,7 +179,8 @@ exports.main = async function(event, context, callback) {
 
 		const spotFleetParams = {
 			SpotFleetRequestConfig: {
-				AllocationStrategy: "lowestPrice",
+				// AllocationStrategy: "lowestPrice",
+				AllocationStrategy: "capacityOptimized",
 				IamFleetRole: variables.iamFleetRole,
 				InstanceInterruptionBehavior: "terminate",
 				LaunchSpecifications: launchSpecifications,
